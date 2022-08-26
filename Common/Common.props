@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <PackageOutputPath>.nupkg</PackageOutputPath>
+        <Version>1.0.0.0</Version>
+
+        <Company>nulastudio</Company>
+        <Authors>LiesAuer</Authors>
+        <Description>Simple code signing task for .exe, .dll, .ps1 using PowerShell Core.</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/nulastudio/SigningTask</PackageProjectUrl>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/nulastudio/SigningTask</RepositoryUrl>
+    </PropertyGroup>
+</Project>

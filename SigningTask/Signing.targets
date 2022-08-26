@@ -1,0 +1,42 @@
+<Project>
+  <Choose>
+    <When Condition="$(SigningCertificate) == 'Auto'">
+      <PropertyGroup>
+        <SigningCertificate>-Certificate Auto</SigningCertificate>
+      </PropertyGroup>
+    </When>
+    <When Condition="$(SigningCertificate) == 'Prompt'">
+      <PropertyGroup>
+        <SigningCertificate>-Certificate Prompt</SigningCertificate>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <SigningCertificate>-Certificate "$(SigningCertificate)"</SigningCertificate>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+  <PropertyGroup>
+    <EnableSigning Condition="$(EnableSigning) != 'True'"></EnableSigning>
+    <SigningBin>pwsh "$(MSBuildThisFileDirectory)../scripts/sign.ps1"</SigningBin>
+    <SigningAlgorithm Condition="$(SigningAlgorithm) != ''">-Algorithm $(SigningAlgorithm)</SigningAlgorithm>
+    <SigningTimeStampServer Condition="$(SigningTimeStampServer) != ''">-TimeStampServer "$(SigningTimeStampServer)"</SigningTimeStampServer>
+    <!-- <_SigningDependsOn Condition="'$(_IsAspNetCoreProject)' == 'true'">AfterPublish;</_SigningDependsOn> -->
+    <!-- <_SigningDependsOn Condition="'$(_IsAspNetCoreProject)' != 'true'">Publish;</_SigningDependsOn> -->
+    <_SigningDependsOn>AfterBuild;</_SigningDependsOn>
+    <SigningAfterTasks>$(_SigningDependsOn)$(SigningAfterTasks)</SigningAfterTasks>
+  </PropertyGroup>
+
+  <Target Name="SigningTask" AfterTargets="$(SigningAfterTasks)" Condition="$(EnableSigning) == 'True'">
+    <ItemGroup>
+      <SigningFiles Include="$(OutputPath)/$(AssemblyName).exe" />
+      <SigningFiles Include="$(OutputPath)/$(AssemblyName).dll" />
+    </ItemGroup>
+
+    <PropertyGroup>
+      <_SigningFiles>@(SigningFiles->'"%(FullPath)"', ' ')</_SigningFiles>
+    </PropertyGroup>
+
+    <Exec Command="$(SigningBin) $(SigningCertificate) $(SigningAlgorithm) $(SigningTimeStampServer) $(_SigningFiles)" />
+  </Target>
+</Project>

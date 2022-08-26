@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../Common/Common.props" />
+
+  <PropertyGroup>
+    <AssemblyName>nulastudio.SigningTask</AssemblyName>
+    <PackageId>nulastudio.SigningTask</PackageId>
+    <TargetFrameworks>net20;netstandard2.0</TargetFrameworks>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="SigningTask.targets" Pack="True" PackagePath="build/net20/nulastudio.SigningTask.targets" />
+    <None Include="SigningTask.targets" Pack="True" PackagePath="build/netstandard2.0/nulastudio.SigningTask.targets" />
+    <None Include="_._" Pack="True" PackagePath="lib/net20/" />
+    <None Include="_._" Pack="True" PackagePath="lib/netstandard2.0/" />
+    <None Include="Signing.targets" Pack="True" PackagePath="targets/" />
+    <None Include="sign.ps1" Pack="True" PackagePath="scripts/" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+__MACOSX
+
+# Visual Studio
+.vs
+
+# vscode
+.vscode
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Rr]elease/
+[Pp]ublish/
+.nupkg/
+Build/*/
+
+# sublime
+*.sublime-workspace
+
+# packages
+vendor/
+
+msbuild.binlog
